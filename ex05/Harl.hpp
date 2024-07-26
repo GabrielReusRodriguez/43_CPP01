@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ReaderFileHandler.hpp                              :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 22:04:32 by gabriel           #+#    #+#             */
-/*   Updated: 2024/07/26 13:35:30 by gabriel          ###   ########.fr       */
+/*   Created: 2024/07/26 16:34:24 by gabriel           #+#    #+#             */
+/*   Updated: 2024/07/26 17:00:35 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef FILEHANDLER_HPP
-# define FILEHANDLER_HPP
+#ifndef HARL_HPP
+# define HARL_HPP
 
 # include <string>
 
-# define READ_BUFFER 50
+# define NUM_LEVELS 4
 
-class ReaderFileHandler
+class Harl
 {
-	private:
-		std::string filename;
-		std::string content;
-
-		void	cleafBuffer(char *buffer, size_t buffer_size);
+	public: 
+		Harl(void);
+		~Harl(void);
+		void	complain(std::string level);
 	
-	public:
-		ReaderFileHandler(void);
-		ReaderFileHandler(std::string filename);
-		~ReaderFileHandler(void);
-		void	setFileName(std::string _fileName);
-		bool	readContent(void);
-		std::string	getContent(void);
+	private:
+		void 	(Harl::*functions_ptr[NUM_LEVELS])(void);
+		std::string functions_str[NUM_LEVELS];
 		
-
+		void	debug(void);
+		void	info(void);
+		void	warning(void);
+		void	error(void);
 };
 
 #endif

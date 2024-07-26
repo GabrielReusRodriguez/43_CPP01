@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   StringHandler.hpp                                  :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 22:54:51 by gabriel           #+#    #+#             */
-/*   Updated: 2024/07/26 13:34:06 by gabriel          ###   ########.fr       */
+/*   Created: 2024/07/26 16:33:37 by gabriel           #+#    #+#             */
+/*   Updated: 2024/07/26 17:04:52 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef STRINGHANDLER_HPP
-# define STRINGHANDLER_HPP
+#include "Harl.hpp"
 
-# include <string>
-
-class StringHandler
+int	main(void)
 {
-	private: 
-		std::string content;
+	Harl harl;
 
-	public:
-		StringHandler(void);
-		StringHandler(std::string content);
-		~StringHandler(void);
-		void	setContent(std::string _content);
-		std::string	replace(std::string pattern, std::string replace);
-};
-
-#endif
+	harl.complain("DEBUG");
+	harl.complain("INFO");
+	harl.complain("WARNING");
+	harl.complain("ERROR");
+	return (0);
+}

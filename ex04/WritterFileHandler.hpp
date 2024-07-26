@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 22:44:07 by gabriel           #+#    #+#             */
-/*   Updated: 2024/07/25 22:46:55 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/07/26 13:36:54 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ class WritterFileHandler
 		std::string	filename;
 		
 	public:
-	WritterFileHandler(std::filename);
+	WritterFileHandler(void);
+	WritterFileHandler(std::string filename);
 	~WritterFileHandler(void);
-	boolean 	writeContent(std::string content);
+	void	setFileName(std::string _filename);
+	bool	writeContent(std::string content);
 };
 
 #endif

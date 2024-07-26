@@ -6,14 +6,20 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 22:46:05 by gabriel           #+#    #+#             */
-/*   Updated: 2024/07/25 22:54:31 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/07/26 13:48:38 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
 #include <fstream>
+#include <iostream>
 
 #include "WritterFileHandler.hpp"
+
+WritterFileHandler::WritterFileHandler(void)
+{
+	this->filename.clear();
+}
 
 WritterFileHandler::WritterFileHandler(std::string _filename)
 {
@@ -25,13 +31,25 @@ WritterFileHandler::~WritterFileHandler(void)
 
 }
 
-boolean WritterFileHandler::writeContent(std::string content)
+void	WritterFileHandler::setFileName(std::string _filename)
 {
-	ofstream writter(this->filename);
-	if (writer.is_open())
+	this->filename = _filename;
+}
+
+bool WritterFileHandler::writeContent(std::string content)
+{
+	std::ofstream writter;
+
+	if (this->filename.empty())
 	{
-		writer.write(content, content.size());
-		writer.close();
+		std::cout << "ERROR: You have not passed the filename." << std::endl;
+		return (false);
+	}
+	writter.open(this->filename.c_str());
+	if (writter.is_open())
+	{
+		writter.write(content.c_str(), content.size());
+		writter.close();
 		return (true);
 	}
 	else

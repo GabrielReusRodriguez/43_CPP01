@@ -6,7 +6,7 @@
 /*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 22:11:03 by gabriel           #+#    #+#             */
-/*   Updated: 2024/07/25 22:53:12 by gabriel          ###   ########.fr       */
+/*   Updated: 2024/07/26 14:43:30 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include <fstream>
 
 #include "ReaderFileHandler.hpp"
+
+/*In CPP we cannot assign null to string because it is NOT  a pointer.*/
+ReaderFileHandler::ReaderFileHandler(void)
+{
+	this->filename.clear();
+}
 
 ReaderFileHandler::ReaderFileHandler(std::string _filename)
 {
@@ -24,6 +30,11 @@ ReaderFileHandler::ReaderFileHandler(std::string _filename)
 ReaderFileHandler::~ReaderFileHandler(void)
 {
 
+}
+
+void	ReaderFileHandler::setFileName(std::string _filename)
+{
+	this->filename = _filename;
 }
 
 void	ReaderFileHandler::cleafBuffer(char *buffer, size_t buffer_size)
@@ -38,18 +49,29 @@ void	ReaderFileHandler::cleafBuffer(char *buffer, size_t buffer_size)
 	}
 }
 
-boolean ReaderFileHandler::readContent(void)
+/* We use the get_line from string funciton becasue */
+/* To append the \n we only add at the beggining of the line 
+if we have content and the line is not empty.*/
+bool ReaderFileHandler::readContent(void)
 {
-	ifstream 	fileReader;
-	char		buffer[READ_BUFFER];
-
-	fileReader.open(this->filename);
+	std::ifstream 	fileReader;
+	std::string		line;
+	
+	if (this->filename.empty())
+	{
+		std::cout << "ERROR: You have not informed the filename." << std::endl;
+		return (false);
+	}
+	fileReader.open(this->filename.c_str());
 	if (fileReader.is_open())
 	{
-		while (fileReader.getline(buffer, READ_BUFFER))
+		while(fileReader)
 		{
-			content.append(buffer);
-			this->cleafBuffer(buffer, READ_BUFFER);
+			std::getline(fileReader, line);
+			if (!content.empty() && !line.empty())
+				content.append("\n");
+			content.append(line);
+			line.clear();
 		}
 		fileReader.close();
 		return (true);

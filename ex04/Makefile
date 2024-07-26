@@ -2,8 +2,10 @@ NAME = ex04
 
 CPP_FLAGS = -Wall -Wextra -Werror -std=c++98 -MMD -MP
 
-SRC_FILES = main
-
+SRC_FILES = main				\
+			ReaderFileHandler	\
+			WritterFileHandler	\
+			StringHandler		
 
 OBJ_DIR = ./obj
 
@@ -13,7 +15,7 @@ DEP = $(addsuffix .d, $(addprefix ${OBJ_DIR}/, ${SRC_FILES}))
 
 all : ${NAME}
 
-${ŃAME}: ${OBJ}
+${NAME}: ${OBJ}
 	c++ ${CPP_FLAGS} ${OBJ} -o ${NAME}
 
 ${OBJ_DIR}/%.o: %.cpp Makefile
